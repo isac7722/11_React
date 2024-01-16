@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!--
+        state란?
+        state는 컴포너트 내부에서 바꿀 수 있는 (바뀔 수 있는) 값을 의미한다
+        props는 컴포넌트가 사용되는 과정에서 부모 컴포넌트가 설정하고 주는 읽기 전용 값이지만 state는 컴포넌트 내부에서 설정되는 값이다.
+        우리는 state의 변경되는 값을 관리하며 다양한 작업을 진행할 수 있다
+
+        리엑트는 클래스 형 컴포넌트에서 state를 직접 사용할 수 있다
+    하지만 함수형 컴포넌트에서는 직점state를 사용하는 것이 불가능하다 
+    -->
+
+    <script type="text/babel">
+         
+        class Counter extends React.Component{
+            
+            constructor(props){
+                // 부모 컴포넌트로부터 전달받은 props를 부모 클래스의 생성자에 전달하면서 컴포넌트를 생성한다
+                super(props);
+                
+
+                this.state={
+                    number:3
+                };
+                    
+                
+            }
+
+            render(){
+                const number = this.state.number;
+                console.log(number);
+
+                /* 
+                    1. state에 변화주기
+                    state에 객체 형태로 컴포넌트가 관리할 값들이 저장되어 있을때
+                    state에 변화를 주고 싶으면 state 객체의 프로퍼티에 직접 접근해서 수정하거나
+                    state 객
+                */
+
+                return (
+                    <>
+                        <h1>{this.state.number}</h1>
+                        <button onClick={() => this.setState({number:number-1})}> -1 </button>
+                        <button onClick={() => this.setState({number:number+1})}> +1 </button>
+                        <button onClick={() => this.setState({number:number*2})}> *2 </button>
+                    </>
+                )
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<Counter/>)
+
+    </script>
+</body>
+</html>
