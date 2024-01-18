@@ -9,7 +9,7 @@
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <!-- jsxx 문법 내에 중괄호를 이용하여 모든 javascript 표현식(문법)을 넣을 수 있다. -->
+    <!-- jsx 문법 내에 중괄호를 이용하여 모든 javascript 표현식(문법)을 넣을 수 있다. -->
     <div id="root"></div>
 
     <script type="text/babel">
@@ -17,14 +17,18 @@
             return `${user.name} ${user.firstName}`;
         }
 
-        const user = {
-            name : "gildong",
-            firstName : "Hong"
+        const user={
+            name : 'gildong',
+            firstName : 'Hong'
         };
 
-        const element = <h1>hello, {formatName(user)}</h1> // 중괄호로 자바스크립트가 실행됨을 알림, 주석 또한 중괄호를 요구
+        const element = <h1> hellow, {formatName(user)}</h1>
+        
+        const test  = document.getElementById("root"/**/);
+
 
         ReactDOM.createRoot(document.getElementById("root")).render(element);
     </script>
+
 </body>
 </html>
