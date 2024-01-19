@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <!-- 
+        컴포넌트 업데이트 생명주기에 대한 업데이트 기준은 크게 4가지로 나뒨다
+        1. props 변경
+        2. state 변경
+        3. 부모 컴포넌트의 리렌더링
+        4. this.forceUpdate로 강제 렌더링 트리거(rnder 내에서는 가급적 사용하지 않아야 한다. 사실상 쓸 일은 것의 없다)
+
+
+        이 중 1~3의 경우 호출되는 생명 주기ㄴ
+
+        getDerivedStateFromProps > shouldComponentUpdate
+
+     -->
+
+     <div id="root"></div>
+     <script type="text/babel">
+        class TimePrinter extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    now : new Date().toLocaleTimeString()
+                }
+            }
+
+            static getDerivedStateFromProps(nextProps, nextState){
+                console.log("getDerivedStateFromProps");
+
+                console.log(nextProps);
+                console.log(nextState);
+
+                /* 
+                    아래와 같은 조건문으로 인수들을 활용해 props에 변화가 생기면 state에도 변화를 줄수 있ㄴ느 코들 ㄹ작성활 수 있다
+                    if(nextProps.text !== nextState.pevProp){
+                        return {noew:nextProps.text}
+                    }
+                */
+
+                return null;
+            }
+
+            shouldComponentUpdate(nextProps, nextState){
+                console.log('shouldComponentUpdate');
+                console.log(nextProps);
+                console.log(nextState);
+                return true;
+            }
+
+            render(){
+                console.log("render");
+                return(
+                    <>
+                        <button onClick={()=> this.setState({now:new Date().toLocaleTimeString()})}>
+                            현재시간확인하기
+                        </button>
+                        <h1>{this.state.now}</h1>
+                    </>
+                );
+            }
+
+            getSnapshotBeforeUpdate(){
+                /* 
+                    리엑트 16.3 이후 만들어진 메소드이다
+                    render에서 만ㄷ르어진 결과
+                */
+                console.log("getSnapshotBeforeUpdate");
+                return {
+                    message : "스냅샵입니다."
+                }
+            }
+
+            componentDidUpdate(prevProps, prevState, snapshot){
+                /* 
+                    리렌더링이 끝나고 화면이 update 된 후 실행된다
+                    업데이트가 끝난 직후이기 때문에 dom관련 처리를 해도 되며
+                */
+
+                console.log("componentDidUpdate");
+                console.log(snapshot);
+
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<TimePrinter/>);
+
+     </script>
+
+</body>
+</html>
