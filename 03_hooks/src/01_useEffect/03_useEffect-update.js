@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react"
+
 
 const UseEffectUpdate = () => {
-    const[user, setUser] = useState({
-        username: '',
-        password: ''
+    const [user, setUser] = useState({
+        username:'',
+        password:''
     });
 
     const onChangeHandler = e => {
@@ -12,18 +13,18 @@ const UseEffectUpdate = () => {
             [e.target.name] : e.target.value
         });
     };
-
-    useEffect(()=>{
+    
+    useEffect(() => {
         console.log("username update");
     },[user.username]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("password update");
     },[user.password]);
 
     return (
         <>
-            <lable>username: </lable>
+            <label>username : </label>
             <input type="text" name="username" onChange={onChangeHandler}/>
             <br/>
             <label>password : </label>
@@ -31,8 +32,7 @@ const UseEffectUpdate = () => {
             <h3>username : {user.username}</h3>
             <h3>password : {user.password}</h3>
         </>
-    )
-
+    );
 }
 
 export default UseEffectUpdate;

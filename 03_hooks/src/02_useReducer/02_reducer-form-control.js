@@ -1,19 +1,19 @@
-import { useEffect, useReducer } from "react"
+import { useReducer } from "react"
 
 
-const reducer = (state,action) => {
-    console.log(action)
+const reducer = (state, action) => {
+    
     return {
         ...state,
-        [action.name]: action.value
+        [action.name] : action.value
     }
 }
 
-export const Input = () => {
+const Input = () => {
     const [state, dispatch] = useReducer(reducer, {
         pass:'',
         passCheck:''
-    })
+    });
     const onChangeHandler = e => dispatch(e.target);
 
     return (
@@ -30,14 +30,14 @@ export const Input = () => {
 
 const ReducerFormControl = () => {
     const [state, dispatch] = useReducer(reducer, {
-        name:'',
+        name: '',
         nickname:''
     });
 
-    const {name, nickname} = state // 위에 것을 가지고 있는 상태
+    const {name, nickname} = state;
     const onChangeHandler = e => dispatch(e.target);
 
-    return (
+    return(
         <>
             <label>이름 : </label>
             <input type="text" name="name" onChange={onChangeHandler}/>
@@ -49,9 +49,9 @@ const ReducerFormControl = () => {
                 <h3>입력한 이름 : {name}</h3>
                 <h3>입력한 닉네임 : {nickname}</h3>
             </div>
+            <Input/>
         </>
     )
-
 }
 
-export default ReducerFormControl
+export default ReducerFormControl;
